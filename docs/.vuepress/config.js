@@ -8,7 +8,7 @@ export default defineUserConfig({
   theme: defaultTheme({
     navbar: [
       {
-        text: "首页",
+        text: "首页666",
         link: "/",
       },
       {
