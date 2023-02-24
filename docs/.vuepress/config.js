@@ -3,6 +3,7 @@ import { defaultTheme, defineUserConfig } from "vuepress";
 export default defineUserConfig({
   lang: "zh-CN",
   title: "can U see",
+  base: "/Blog/",
   description: "can can need",
   theme: defaultTheme({
     navbar: [
