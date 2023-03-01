@@ -23,10 +23,10 @@ export default defineUserConfig({
     sidebar: {
       "/components/": [
         {
-          text: "写点啥",
+          text: "About vue",
           children: [
             {
-              text: "得写点啥",
+              text: "自定义指令",
               link: "/components/some/",
             },
           ],

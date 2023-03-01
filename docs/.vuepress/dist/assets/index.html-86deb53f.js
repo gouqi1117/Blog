@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-776baa7b","path":"/components/some/","title":"写点东西下来","lang":"zh-CN","frontmatter":{},"headers":[],"git":{"updatedTime":1677227834000,"contributors":[{"name":"姚亦姚","email":"11168691+gouqiyao@user.noreply.gitee.com","commits":2}]},"filePathRelative":"components/some/README.md"}');export{e as data};

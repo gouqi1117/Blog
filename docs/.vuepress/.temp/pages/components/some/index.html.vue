@@ -1,4 +1,50 @@
-<template><div><h1 id="写点东西下来" tabindex="-1"><a class="header-anchor" href="#写点东西下来" aria-hidden="true">#</a> 写点东西下来</h1>
+<template><div><h1 id="vue自定义指令" tabindex="-1"><a class="header-anchor" href="#vue自定义指令" aria-hidden="true">#</a> Vue自定义指令</h1>
+<p>Vue中内置了一系列的指令（比如v-model，v-show，v-if），在Vue中是允许你注册自定义指令的。</p>
+<h2 id="以下是在vue中的两种不同的写法" tabindex="-1"><a class="header-anchor" href="#以下是在vue中的两种不同的写法" aria-hidden="true">#</a> <em>以下是在vue中的两种不同的写法：</em></h2>
+<h3 id="组合式写法" tabindex="-1"><a class="header-anchor" href="#组合式写法" aria-hidden="true">#</a> 组合式写法</h3>
+<div class="language-vue line-numbers-mode" data-ext="vue"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">v-focus</span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token comment">// 在setup里，自定义指令必须以v开头</span>
+  <span class="token keyword">const</span> vFocus <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">mounted</span><span class="token operator">:</span><span class="token punctuation">(</span><span class="token parameter">el</span><span class="token punctuation">)</span> <span class="token operator">=></span> el<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时第一次进入该页面时，将会自动聚焦于该input输入框</p>
+<p>在<code v-pre>&lt;script setup&gt;</code>中，编写自定义指令时必须为以<code v-pre>v</code>开头的驼峰式命名的变量。</p>
+<h3 id="选项式写法" tabindex="-1"><a class="header-anchor" href="#选项式写法" aria-hidden="true">#</a> 选项式写法</h3>
+<div class="language-vue line-numbers-mode" data-ext="vue"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">v-focus</span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">directives</span><span class="token operator">:</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">focus</span><span class="token operator">:</span><span class="token punctuation">{</span>
+      <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token parameter">el</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        el<span class="token operator">?.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>在选项时写法中，注册自定义指令需通过<code v-pre>directives</code>选项</p>
+<h2 id="自定义指令的生命周期" tabindex="-1"><a class="header-anchor" href="#自定义指令的生命周期" aria-hidden="true">#</a> 自定义指令的生命周期</h2>
+<ul>
+<li>Vue为自定义指令提供了如下的几个钩子函数：
+<ul>
+<li><em><strong>created</strong></em>：在绑定元素的 attribute 或事件监听器被应用之前调用；</li>
+<li><em><strong>beforeMount</strong></em>：当指令第一次绑定到元素并且在挂载父组件之前调用；</li>
+<li><em><strong>mounted</strong></em>：在绑定元素的父组件被挂载后调用；</li>
+<li><em><strong>beforeUpdate</strong></em>：在更新包含组件的 VNode 之前调用；</li>
+<li><em><strong>updated</strong></em>：在包含组件的 VNode 及其子组件的 VNode 更新后调用；</li>
+<li><em><strong>beforeUnmount</strong></em>：在卸载绑定元素的父组件之前调用；</li>
+<li><em><strong>unmounted</strong></em>：当指令与元素解除绑定且父组件已卸载时，只调用一次；</li>
+</ul>
+</li>
+</ul>
 </div></template>
 
 
