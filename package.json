@@ -1,4 +1,5 @@
 {
+  "license": "ISC",
   "devDependencies": {
     "vuepress": "^2.0.0-beta.60"
   },
